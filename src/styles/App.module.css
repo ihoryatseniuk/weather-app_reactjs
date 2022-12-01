@@ -1,0 +1,9 @@
+.header {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 60px;
+  font-family: "Ubuntu", sans-serif;
+  margin: 0;
+  margin-top: 60px;
+}
