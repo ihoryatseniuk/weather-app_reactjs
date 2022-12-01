@@ -1,5 +1,5 @@
 import classes from "./styles/App.module.css";
-import Input from "./components/Input.jsx";
+import Input from "./components/Input/Input.jsx";
 
 function App() {
   return (
