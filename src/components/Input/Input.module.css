@@ -17,8 +17,12 @@
   font-size: 20px;
   outline: 0.5px solid black;
   border: solid 0.5px white;
-  color: white;
+  color: black;
 }
+
+/* .form-container input:focus {
+  outline: 0.5px solid orangered;
+} */
 
 .form-container button {
   padding: 13px 20px 13px 20px;
