@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  margin-top: 40px;
+  width: 400px;
+  font-size: 40px;
+  border-radius: 10px;
+  background-color: #3f4452;
+  color: white;
+  padding: 30px 10px 30px 10px;
+}
+
+.temperature {
+  margin-top: 10px;
+}
+
+.image {
+  margin-top: 20px;
+}
