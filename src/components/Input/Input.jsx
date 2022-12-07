@@ -11,6 +11,7 @@ const Input = ({ setCity, city, search }) => {
       <div className={classes["form-container"]}>
         <form onSubmit={handleSubmit} className={classes.form}>
           <input
+            autoFocus
             type="text"
             onChange={(e) => setCity(e.target.value)}
             value={city}
