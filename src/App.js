@@ -7,16 +7,26 @@ import { useState, useEffect } from "react";
 
 function App() {
   const [city, setCity] = useState("");
+  const [cities, setCities] = useState([]);
   const [weather, setWeather] = useState();
 
-  const search = async (storage) => {
+  const search = async () => {
     const data = await fetchWeather(city);
     setWeather(data);
     localStorage.setItem("city", JSON.stringify(city));
+    if (data.cod === 200) {
+      if (cities.includes(data.name)) {
+        setCities([...cities]);
+      } else {
+        setCities([...cities, data.name]);
+      }
+    }
     setCity("");
   };
 
-  const realoadFetching = async () => {
+  localStorage.setItem("cities", JSON.stringify(cities));
+
+  const reloadFetching = async () => {
     let storage = JSON.parse(localStorage.getItem("city"));
     const data = await fetchWeather(storage);
     setWeather(data);
@@ -24,7 +34,7 @@ function App() {
   };
 
   useEffect(() => {
-    realoadFetching();
+    reloadFetching();
   }, []);
 
   if (weather) {

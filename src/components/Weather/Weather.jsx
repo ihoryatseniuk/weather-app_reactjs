@@ -1,7 +1,6 @@
 import styles from "./Weather.module.css";
 
 const Weather = ({ weather }) => {
-  console.log(weather);
   return (
     <>
       <div className={styles.container}>
