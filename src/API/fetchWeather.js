@@ -4,7 +4,6 @@ const api = {
 };
 
 export const fetchWeather = async (city) => {
-  console.log(city);
   const data = await fetch(
     `${api.base}weather?q=${city}&appid=${api.key}&units=metric`
   )
