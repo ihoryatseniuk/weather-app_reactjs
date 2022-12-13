@@ -6,14 +6,21 @@ import { fetchWeather } from "./API/fetchWeather";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [city, setCity] = useState("");
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState(
+    localStorage.getItem("cities") === null
+      ? []
+      : JSON.parse(localStorage.getItem("cities"))
+  );
   const [weather, setWeather] = useState();
+  console.log(cities);
 
-  const search = async () => {
+  const search = async (city) => {
     const data = await fetchWeather(city);
+    citiesLocalStorage(data);
     setWeather(data);
-    localStorage.setItem("city", JSON.stringify(city));
+  };
+
+  const citiesLocalStorage = (data) => {
     if (data.cod === 200) {
       if (cities.includes(data.name)) {
         setCities([...cities]);
@@ -21,17 +28,17 @@ function App() {
         setCities([...cities, data.name]);
       }
     }
-    setCity("");
   };
-
-  localStorage.setItem("cities", JSON.stringify(cities));
 
   const reloadFetching = async () => {
     let storage = JSON.parse(localStorage.getItem("city"));
     const data = await fetchWeather(storage);
     setWeather(data);
-    setCity("");
   };
+
+  useEffect(() => {
+    localStorage.setItem("cities", JSON.stringify(cities));
+  }, [cities]);
 
   useEffect(() => {
     reloadFetching();
@@ -41,7 +48,7 @@ function App() {
     return (
       <div>
         <h1 className={classes.header}>Weather App</h1>
-        <Input setCity={setCity} city={city} search={search} />
+        <Input search={search} />
         {weather.cod === 200 ? <Weather weather={weather} /> : <Error />}
       </div>
     );
@@ -49,7 +56,7 @@ function App() {
     return (
       <div>
         <h1 className={classes.header}>Weather App</h1>
-        <Input setCity={setCity} city={city} search={search} />
+        <Input search={search} />
       </div>
     );
   }

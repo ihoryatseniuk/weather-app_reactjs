@@ -1,9 +1,14 @@
 import classes from "./Input.module.css";
+import { useState } from "react";
 
-const Input = ({ setCity, city, search }) => {
+const Input = ({ search }) => {
+  const [city, setCity] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    search();
+    localStorage.setItem("city", JSON.stringify([city]));
+    search(city);
+    setCity("");
   };
 
   return (
