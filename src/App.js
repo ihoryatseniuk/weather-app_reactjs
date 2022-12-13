@@ -4,6 +4,7 @@ import Weather from "./components/Weather/Weather.jsx";
 import Error from "./components/Error/Error.jsx";
 import { fetchWeather } from "./API/fetchWeather";
 import { useState, useEffect } from "react";
+import Cities from "./components/Cities/Cities";
 
 function App() {
   const [cities, setCities] = useState(
@@ -49,6 +50,7 @@ function App() {
       <div>
         <h1 className={classes.header}>Weather App</h1>
         <Input search={search} />
+        <Cities cities={cities} />
         {weather.cod === 200 ? <Weather weather={weather} /> : <Error />}
       </div>
     );
@@ -57,6 +59,7 @@ function App() {
       <div>
         <h1 className={classes.header}>Weather App</h1>
         <Input search={search} />
+        <Cities cities={cities} />
       </div>
     );
   }
