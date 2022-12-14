@@ -3,7 +3,6 @@ import styles from "./Cities.module.css";
 const Cities = ({ cities, search, deleteCityHandler }) => {
   console.log(cities);
   const onSelectCityHandler = (city) => {
-    console.log(city);
     search(city);
   };
   const onDeleteCityHandler = (id) => {
@@ -16,7 +15,7 @@ const Cities = ({ cities, search, deleteCityHandler }) => {
           <div className={styles["city-btn"]} key={city.id}>
             <li
               onClick={(e) => {
-                onSelectCityHandler(e.target.innerHTML);
+                onSelectCityHandler(city);
               }}
             >
               {city.name}
