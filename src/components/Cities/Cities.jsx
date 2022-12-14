@@ -1,11 +1,14 @@
 import styles from "./Cities.module.css";
 
-const Cities = ({ cities, search }) => {
+const Cities = ({ cities, search, deleteCityHandler }) => {
   console.log(cities);
   const onSelectCityHandler = (city) => {
+    console.log(city);
     search(city);
   };
-  const onDeleteCityHandler = (city) => {};
+  const onDeleteCityHandler = (id) => {
+    deleteCityHandler(id);
+  };
   return (
     <>
       <div className={styles["container"]}>
@@ -18,13 +21,14 @@ const Cities = ({ cities, search }) => {
             >
               {city.name}
             </li>
-            <div key={city.id} className={styles["image-container"]}>
-              <img
-                onClick={(e) => {
-                  onDeleteCityHandler(e);
-                }}
-                src={`images/close-btn.png`}
-              ></img>
+            <div
+              onClick={() => {
+                onDeleteCityHandler(city.id);
+              }}
+              key={city.id}
+              className={styles["image-container"]}
+            >
+              <img src={`images/close-btn.png`}></img>
             </div>
           </div>
         ))}

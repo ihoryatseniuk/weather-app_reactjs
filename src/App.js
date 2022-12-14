@@ -12,6 +12,7 @@ function App() {
       ? []
       : JSON.parse(localStorage.getItem("cities"))
   );
+  console.log(cities);
 
   const [weather, setWeather] = useState();
 
@@ -25,11 +26,15 @@ function App() {
   };
 
   const citiesLocalStorage = (city) => {
-    if (cities.includes(city.id)) {
+    if (cities.find((o) => o.name === city.name)) {
       setCities([...cities]);
     } else {
       setCities([...cities, city]);
     }
+  };
+
+  const deleteCityHandler = (id) => {
+    setCities(cities.filter((city) => city.id !== id));
   };
 
   const reloadFetching = async () => {
@@ -51,7 +56,11 @@ function App() {
       <div>
         <h1 className={classes.header}>Weather App</h1>
         <Input search={search} />
-        <Cities search={search} cities={cities} />
+        <Cities
+          deleteCityHandler={deleteCityHandler}
+          search={search}
+          cities={cities}
+        />
         {weather.cod === 200 ? <Weather weather={weather} /> : <Error />}
       </div>
     );
@@ -60,7 +69,11 @@ function App() {
       <div>
         <h1 className={classes.header}>Weather App</h1>
         <Input search={search} />
-        <Cities search={search} cities={cities} />
+        <Cities
+          deleteCityHandler={deleteCityHandler}
+          search={search}
+          cities={cities}
+        />
       </div>
     );
   }
