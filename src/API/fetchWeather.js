@@ -5,7 +5,7 @@ const api = {
 
 export const fetchWeather = async (city) => {
   const data = await fetch(
-    `${api.base}weather?q=${city}&appid=${api.key}&units=metric`
+    `${api.base}weather?q=${city.name}&appid=${api.key}&units=metric`
   )
     .then((data) => data.json())
     .catch((error) => {

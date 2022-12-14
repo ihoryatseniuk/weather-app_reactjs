@@ -12,22 +12,23 @@ function App() {
       ? []
       : JSON.parse(localStorage.getItem("cities"))
   );
+
   const [weather, setWeather] = useState();
-  console.log(cities);
 
   const search = async (city) => {
     const data = await fetchWeather(city);
-    citiesLocalStorage(data);
+
+    if (data.cod === 200) {
+      citiesLocalStorage(city);
+    }
     setWeather(data);
   };
 
-  const citiesLocalStorage = (data) => {
-    if (data.cod === 200) {
-      if (cities.includes(data.name)) {
-        setCities([...cities]);
-      } else {
-        setCities([...cities, data.name]);
-      }
+  const citiesLocalStorage = (city) => {
+    if (cities.includes(city.id)) {
+      setCities([...cities]);
+    } else {
+      setCities([...cities, city]);
     }
   };
 
@@ -50,7 +51,7 @@ function App() {
       <div>
         <h1 className={classes.header}>Weather App</h1>
         <Input search={search} />
-        <Cities cities={cities} />
+        <Cities search={search} cities={cities} />
         {weather.cod === 200 ? <Weather weather={weather} /> : <Error />}
       </div>
     );
@@ -59,7 +60,7 @@ function App() {
       <div>
         <h1 className={classes.header}>Weather App</h1>
         <Input search={search} />
-        <Cities cities={cities} />
+        <Cities search={search} cities={cities} />
       </div>
     );
   }
