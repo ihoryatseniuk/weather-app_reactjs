@@ -33,3 +33,9 @@
   color: white;
   border: none;
 }
+
+@media (max-width: 500px) {
+  .form-container input {
+    width: 100%;
+  }
+}
